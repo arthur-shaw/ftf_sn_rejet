@@ -193,7 +193,7 @@ issue_portable_sans_communication <- susoreview::create_issue(
         "ERREUR: possède portable sans frais de communication. ",
         "Le ménage possède un téléphone portable selon la section 8.7, ",
         "mais ne déclare aucun dépense de crédit de communication dans la ",
-        "section 8.2.",
+        "section 8.2. ",
         "Ceci est peu problable. ",
         "Veuillez vérifier quelle information est correcte."
     )
@@ -444,7 +444,7 @@ issue_conso_enfant_24h_v_7j <- purrr::pmap_dfr(
         type = 1,
         desc = glue::glue("consommation de {..1} par un enfant dans les dernier 24h sans consommation par le ménage dans les 7 derniers jours"),
         comment = paste0(
-            glue::glue("ERREUR: consommation de {..1} par un enfant dans les dernières 24h sans consommation par le ménage dans les 7 derniers jours."),
+            glue::glue("ERREUR: consommation de {..1} par un enfant dans les dernières 24h sans consommation par le ménage dans les 7 derniers jours. "),
             glue::glue("Dans la section 5, l'un des enfants a consommée {..1} dans les dernières 24 heures. "),
             glue::glue("Or dans la section 8.1, le ménage déclare n'avoir pas consommé {..1} dans les 7 derniers jours. "),
             "Les dernières 24 rentrent dans les 7 derniers jours. ",
