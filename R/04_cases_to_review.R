@@ -45,11 +45,11 @@ load_filtered <- function(
 }
 
 fichiers <- c(
-    main_file_dta, "membres.dta", "filets_securite.dta", "equipements.dta", 
+    main_file_dta, "PERSONS.dta", "plot_roster.dta", "sheep.dta", "Sec8_1.dta", "TU_Hours.dta",
     "interview__errors.dta", "interview__diagnostics.dta", "interview__comments.dta"
 )
 fichier_noms <- c(
-    "menages", "membres", "filets_securite", "equipements", 
+    "menages", "membres", "parcelles", "moutons", "repos_hors_menage", "emploi_temps",
     "suso_errors", "suso_diagnostics", "comments"
 )
 
@@ -62,6 +62,12 @@ purrr::walk2(
         name = .y,
         filter_df = cases_to_review
     )
+)
+
+load_filtered(
+    dir = derived_dir,
+    file = "consommation_alimentaire_7d.dta",
+    filter_df = cases_to_review
 )
 
 # TODO: uncomment once calorie file exists

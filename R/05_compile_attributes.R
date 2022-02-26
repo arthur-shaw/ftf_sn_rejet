@@ -2,21 +2,13 @@
 # Check that necessary objects exist
 # =============================================================================
 
-"Senegal_FtF_2022" # hhold
-"PERSONS" # members
-"plot_roster" # plots
-"sheep" # sheep
-"Sec8_1" # FAFH
-"TU_Hours" # time use
-
-
 objects_needed <- c(
     "menages",
-    "membres", 
-    "filets_securite",
-    "equipements",
-    "calories_totales",
-    "calories_par_item"
+    "membres",
+    "parcelles",
+    "moutons", 
+    "repos_hors_menage", 
+    "emploi_temps"
 )
 
 check_exists(objects_needed)
