@@ -265,8 +265,8 @@ attrib_woman_24h <- purrr::map2(
         .x = w_vals,
         .y = w_names,
         .f = ~ susoreview::create_attribute(
-            df = menages,
             condition = !!rlang::parse_quo(
+            df = membres,
                 paste0("v409a__", .x, " == 1"),
                 rlang::global_env()
             ),
@@ -340,7 +340,6 @@ attrib_child_24h <- purrr::map2(
         .x = c_vals,
         .y = c_names,
         .f = ~ susoreview::create_attribute(
-            df = menages,
             condition = !!rlang::parse_quo(
                 paste0("v539a__", .x, " == 1"),
                 rlang::global_env()
@@ -361,7 +360,6 @@ attrib_child_24h <- purrr::map2(
 
 # riz
 attrib_conso7d_propre_riz <- susoreview::create_attribute(
-    df = cosommation_alimentaire,
     condition = aliment__id %in% c(1, 2) & v8106 > 0,
     attrib_name = "conso7d_propre_riz",
     attrib_vars = "v8101_1|v8106"
@@ -369,16 +367,16 @@ attrib_conso7d_propre_riz <- susoreview::create_attribute(
 
 # patate douce
 attrib_conso7d_propre_patate_douce <- susoreview::create_attribute(
-    df = cosommation_alimentaire,
     condition = aliment__id == 128 & v8106 > 0,
+    df = consommation_alimentaire_7d,
     attrib_name = "conso7d_propre_patate_douce",
     attrib_vars = "v8101_7|v8106"
 )
 
 # mouton
 attrib_conso7d_propre_mouton <- susoreview::create_attribute(
-    df = cosommation_alimentaire,
     condition = aliment__id == 29 & v8106 > 0,
+    df = consommation_alimentaire_7d,
     attrib_name = "conso7d_propre_mouton",
     attrib_vars = "v8101_2|v8106"
 )
@@ -390,7 +388,7 @@ attrib_conso7d_propre_mouton <- susoreview::create_attribute(
 # céréales
 # Nourriture faite à base de céréales telles que le maïs, mil, riz ou fonio y compris du pain, des nouilles, des pâtes alimentaires (spagetti, macaroni, etc), du couscous, de la bouillie, de l'avoine (Quaker), du popcorn ou thiakry?.............
 attrib_cons7j_cereales <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = aliment__id %in% c(1:23),
     attrib_name = "cons7j_cereales",
     attrib_vars = "v8101_1"
@@ -399,7 +397,7 @@ attrib_cons7j_cereales <- susoreview::any_obs(
 # légumes à la chair orange
 # Citrouilles, carottes, courges ou patates douces qui sont jaunes ou oranges à l'intérieur?.........................................................................................................................................................
 attrib_cons7j_legumes_orange <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = (
         aliment__id %in% c(
             90, # carottes
@@ -414,7 +412,7 @@ attrib_cons7j_legumes_orange <- susoreview::any_obs(
 # tubercules à la chair blanche
 # Pommes de terre blanches, ignames blanches, manioc, taro, navet, ou tout autre aliment à base de racines?..........................................................................................................................................
 attrib_cons7j_tubercules_blanches <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = (
         aliment__id %in% c(
             123, # Manioc
@@ -431,7 +429,7 @@ attrib_cons7j_tubercules_blanches <- susoreview::any_obs(
 # bananes plantain ou bananes douce
 # Des bananes plantains ou des bananes vertes?...................................................................................................................................................................................................................
 attrib_cons7j_bananes <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = (
         aliment__id %in% c(
             76, # Banane douce
@@ -446,7 +444,7 @@ attrib_cons7j_bananes <- susoreview::any_obs(
 # feuilles vertes
 # Des légumes à feuilles vert foncé tels que le moringa, les feuilles de baobab, les feuilles de patate douce, les feuilles de manioc, les feuilles d'hibiscus, les feuilles d'amaranthe, les épinards ou d'autres légumes à feuilles vert foncé ?...
 attrib_cons7j_feuilles_vertes <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = (
         aliment__id %in% c(
             102, # Feuilles d'oseille (bissap)
@@ -465,7 +463,7 @@ attrib_cons7j_feuilles_vertes <- susoreview::any_obs(
 # d'autres légumes
 # D'autres légumes, par exemple des haricots verts, des aubergines, des gombos, des oignons, des choux, des tomates ?................................................................................................................................
 attrib_cons7j_autres_legumes <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = (
         aliment__id %in% c(
             88, # Salade (laitue)
@@ -491,7 +489,7 @@ attrib_cons7j_autres_legumes <- susoreview::any_obs(
 # fruits riches en vitamine A
 # Mangues mûres, papayes mûres, cantaloup ou d'autres aliments riches en vitamine A..................................................................................................................................................................
 attrib_cons7j_fruits_vit_a <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = (
         aliment__id %in% c(
             71, # Mangue
@@ -505,7 +503,7 @@ attrib_cons7j_fruits_vit_a <- susoreview::any_obs(
 # d'autres fruits
 # D'autres fruits?...................................................................................................................................................................................................................................
 attrib_cons7j_autres_fruits <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = (
         aliment__id %in% c(
             72, # Ananas
@@ -530,7 +528,7 @@ attrib_cons7j_autres_fruits <- susoreview::any_obs(
 # Du foie, des reins, du cœur ou d'autres abats provenant d'animaux domestiques tels que la vache, le mouton, la chèvre, le poulet ou le canard ?....................................................................................................
 # Du foie, des reins, du cœur ou d'autres abats provenant d'animaux sauvages tels que le lièvre, les lézards ou les cerfs ?..........................................................................................................................
 attrib_cons7j_abats <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = aliment__id == 31, # Abats et tripes (foie, rognon, etc.)
     attrib_name = "cons7j_abats",
     attrib_vars = "v8101_2"
@@ -539,7 +537,7 @@ attrib_cons7j_abats <- susoreview::any_obs(
 # viande d'animaux domestiqués
 # De la viande d'animaux domestiques, tels que bœuf, mouton, le chèvre,  poulet, ou canard?..........................................................................................................................................................
 attrib_cons7j_viande_dom <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = (
         aliment__id %in% c(
             27:30, # Viande de bœuf, Viande de chameau, Viande de mouton, Viande de chèvre
@@ -555,7 +553,7 @@ attrib_cons7j_viande_dom <- susoreview::any_obs(
 # viande d'animaux sauvage
 # De la viande d'animaux sauvages tels que le lièvre, le lézard, ou le cerf?.........................................................................................................................................................................
 attrib_cons7j_viand_sauvage <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = (
         aliment__id %in% c(
             38, # Gibiers
@@ -569,7 +567,7 @@ attrib_cons7j_viand_sauvage <- susoreview::any_obs(
 # des oeufs
 # Des œufs?..........................................................................................................................................................................................................................................
 attrib_cons7j_oeufs <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = aliment__id == 60, # Œufs
     attrib_name = "cons7j_oeufs",
     attrib_vars = "v8101_4"
@@ -578,7 +576,7 @@ attrib_cons7j_oeufs <- susoreview::any_obs(
 # poissons
 # Poissons, crustacés ou fruits de mer frais, fumés, ou séchés ?.....................................................................................................................................................................................
 attrib_cons7j_poissons <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = aliment__id %in% c(40:51),
     attrib_name = "cons7j_poisson",
     attrib_vars = "v8101_3"
@@ -587,7 +585,7 @@ attrib_cons7j_poissons <- susoreview::any_obs(
 # légumineuses
 # Des aliments à base de haricots, de pois, de lentilles ou d'arachides tels que le niébé, le ragout d'arachide, le beurre d'arachide?...............................................................................................................
 attrib_cons7j_legumineuses <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = (
         aliment__id %in% c(
             109:112, # Petits pois, Petit pois secs, Autres légumes secs n.d.a, Niébé/Haricots secs
@@ -602,7 +600,7 @@ attrib_cons7j_legumineuses <- susoreview::any_obs(
 # noix et graines
 # Des aliments à base de noix ou de graines telles que la noix de cajou, les noix sauvages ou les graines de sésame ?................................................................................................................................
 attrib_cons7j_noix_graines <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = (
         aliment__id %in% c(
             120, # Sésame
@@ -617,7 +615,7 @@ attrib_cons7j_noix_graines <- susoreview::any_obs(
 # produits laitiers
 # FEMME: Lait, fromage, yaourt ou autres produits laitiers?							
 attrib_7jw_laitier <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = aliment__id %in% c(52:57, 59),
     attrib_name = "cons7jw_laitier",
     attrib_vars = "v8101_4"
@@ -625,7 +623,7 @@ attrib_7jw_laitier <- susoreview::any_obs(
 
 # ENFANT: Fromage dur ou mou?
 attrib_7jc_laitier <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = aliment__id %in% c(57, 59),
     attrib_name = "cons7jc_laitier",
     attrib_vars = "v8101_4"
@@ -634,7 +632,7 @@ attrib_7jc_laitier <- susoreview::any_obs(
 # huiles et matière grasse
 # De l'huile, des matières grasses, du beurre ou des aliments préparés avec l'un de ces ingrédients?.................................................................................................................................................
 attrib_cons7j_huiles <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = aliment__id %in% c(61:70),
     attrib_name = "cons7j_huiles",
     attrib_vars = "v8101_10"
@@ -643,7 +641,7 @@ attrib_cons7j_huiles <- susoreview::any_obs(
 # viande transformée
 # Viandes transformées...............................................................................................................................................................................................................................
 attrib_cons7j_viandes_transformees <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = (
         aliment__id %in% c(
             36, # Charcuterie (jambon, saucisson), conserves de viandes
@@ -657,7 +655,7 @@ attrib_cons7j_viandes_transformees <- susoreview::any_obs(
 # fritures
 # Aliments frits et salés tels que les chips, beignets, fatayas, pomme de terre frite................................................................................................................................................................
 attrib_cons7j_fritures <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = aliment__id == 26, # Beignets, galettes
     attrib_name = "cons7j_fritures",
     attrib_vars = "v8101_1"
@@ -666,7 +664,7 @@ attrib_cons7j_fritures <- susoreview::any_obs(
 # boissons sucrées
 # Boissons gazeuses/sodas, jus sucrés, boissons à saveur de chocolat.................................................................................................................................................................................
 attrib_cons7j_boissons_sucrees <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = (
         aliment__id %in% c(
             158, # Chocolat en poudre
@@ -683,7 +681,7 @@ attrib_cons7j_boissons_sucrees <- susoreview::any_obs(
 # sucreries
 # Des aliments sucrés tels que des chocolats, des sucreries, des bonbons, des pâtisseries, des gâteaux ou des biscuits?..............................................................................................................................
 attrib_cons7j_sucreries <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = aliment__id %in% c(134:138),
     attrib_name = "cons7j_sucreries",
     attrib_vars = "v8101_8"
@@ -692,7 +690,7 @@ attrib_cons7j_sucreries <- susoreview::any_obs(
 # condiments
 # Des condiments pour la saveur, tels que des cubes, des piments, des épices, sauce soja, de la poudre de poisson, etc?..............................................................................................................................
 attrib_cons7j_condiments <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = aliment__id %in% c(139:152),
     attrib_name = "cons7j_condiments",
     attrib_vars = "v8101_9"
@@ -701,7 +699,7 @@ attrib_cons7j_condiments <- susoreview::any_obs(
 # palme rouge
 # Des aliments à base d'huile de palme rouge, de noix de palme rouge ou de sauce graine?.............................................................................................................................................................
 attrib_cons7j_palme_rouge <- susoreview::any_obs(
-    df = consommation_alimentaire,
+    df = consommation_alimentaire_7d,
     where = (
         aliment__id %in% c(
             63, # Huile de palme rouge
@@ -721,7 +719,7 @@ attrib_cons7j_palme_rouge <- susoreview::any_obs(
 
 # parcelle de riz
 attrib_parcelle_riz <- susoreview::any_obs(
-    df = plot_roster,
+    df = parcelles,
     where = v79_n5__3 == 1,
     attrib_name = "parcelle_riz",
     attrib_vars = "v79_n5"
@@ -729,7 +727,7 @@ attrib_parcelle_riz <- susoreview::any_obs(
 
 # parcelle de patate douce
 attrib_parcelle_patate_douce <- susoreview::any_obs(
-    df = plot_roster,
+    df = parcelles,
     where = v79_n5__15 == 1,
     attrib_name = "parcelle_patate_douce",
     attrib_vars = "v79_n5"
