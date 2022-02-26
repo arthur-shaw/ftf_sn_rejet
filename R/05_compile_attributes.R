@@ -497,7 +497,7 @@ attrib_cons7j_fruits_vit_a <- susoreview::any_obs(
         )
     ),
     attrib_name = "cons7j_fruits_vit_a",
-    attrib_name = "v8101_5"
+    attrib_vars = "v8101_5"
 )
 
 # d'autres fruits
