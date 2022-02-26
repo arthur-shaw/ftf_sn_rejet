@@ -419,7 +419,7 @@ attrib_cons7j_tubercules_blanches <- susoreview::any_obs(
             124, # igname
             126, # Pomme de terre
             127, # Taro, macabo
-            129, # Autres tubercules n.d.a
+            129 # Autres tubercules n.d.a
         )
     ),
     attrib_name = "cons7j_tubercules_blanches",
@@ -605,7 +605,7 @@ attrib_cons7j_noix_graines <- susoreview::any_obs(
         aliment__id %in% c(
             120, # Sésame
             121, # Noix de cajou
-            122, # Noix de karité
+            122 # Noix de karité
         )
     ),
     attrib_name = "cons7j_noix_graines",
@@ -704,7 +704,7 @@ attrib_cons7j_palme_rouge <- susoreview::any_obs(
         aliment__id %in% c(
             63, # Huile de palme rouge
             68, # Huile de palme raffinée
-            70, # Autres huiles n.d.a. (maïs, soja, huile palmiste, etc.)
+            70 # Autres huiles n.d.a. (maïs, soja, huile palmiste, etc.)
         )
     ),
     attrib_name = "cons7j_palme_rouge",
