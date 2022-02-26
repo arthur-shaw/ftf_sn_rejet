@@ -346,7 +346,6 @@ c_vars <- c(
     "c24_huiles",
     "c24_viandes_transformees",
     "c24_fritures",
-    "c24_boissons_sucrees",
     "c24_sucreries",
     "c24_condiments",
     "c24_palme_rouge"
@@ -432,8 +431,12 @@ alim_descs <- c(
     "des aliments à base d'huile de palme rouge, de noix de palme rouge ou de sauce graine"
 )
 
+# remove boissons sucrées from list
+enf_cons_vars <- cons_vars[! cons_vars %in% c("cons7j_sucreries")]
+enf_alim_desc <- alim_descs[! alim_descs %in% c("des boissons sucrées (e.g., boissons gazeuses/sodas, jus sucrés, etc)")]
+
 issue_conso_enfant_24h_v_7j <- purrr::pmap_dfr(
-    .l = list(alim_descs, c_vars, cons_vars),
+    .l = list(enf_alim_desc, c_vars, enf_cons_vars),
     .f = ~ susoreview::create_issue(
         df_attribs = attribs,
         vars = c(..2, ..3),

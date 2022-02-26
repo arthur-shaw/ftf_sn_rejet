@@ -328,7 +328,6 @@ c_names <- c(
     "c24_huiles",
     "c24_viandes_transformees",
     "c24_fritures",
-    "c24_boissons_sucrees",
     "c24_sucreries",
     "c24_condiments",
     "c24_insectes",
