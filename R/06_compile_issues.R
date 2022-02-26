@@ -4,7 +4,7 @@
 
 objects_needed <- c(
     "attribs",
-    "calories_par_item",
+    # "calories_par_item",
     "suso_errors"
 )
 
@@ -80,98 +80,98 @@ issue_no_non_food_cons <- susoreview::create_issue(
 # Calories
 # -----------------------------------------------------------------------------
 
-# calories totales trop élevées
-issue_calories_tot_high <- susoreview::create_issue(
-    df_attribs = attribs,
-    vars = c("calories_totales_elevees", "p_calcule_ok"),
-    where = calories_totales_elevees == 1 & p_calcule_ok == 1,
-    type = 1,
-    desc = "Calories totales trop élevées",
-    comment = paste0(
-        "ERREUR: La consommation alimentaire déclarée est trop élevée. ",
-        "D'abord, vérifier les quantités et les unités déclarées ",
-        "pour chaque produit dans 8.1b. ",
-        "Ensuite, confirmer que les déclarations concernent la consommation ",
-        "et non pas l'acquisition."    
-    )
-)
+# # calories totales trop élevées
+# issue_calories_tot_high <- susoreview::create_issue(
+#     df_attribs = attribs,
+#     vars = c("calories_totales_elevees", "p_calcule_ok"),
+#     where = calories_totales_elevees == 1 & p_calcule_ok == 1,
+#     type = 1,
+#     desc = "Calories totales trop élevées",
+#     comment = paste0(
+#         "ERREUR: La consommation alimentaire déclarée est trop élevée. ",
+#         "D'abord, vérifier les quantités et les unités déclarées ",
+#         "pour chaque produit dans 8.1b. ",
+#         "Ensuite, confirmer que les déclarations concernent la consommation ",
+#         "et non pas l'acquisition."    
+#     )
+# )
 
-# calories totales trop faible
-issue_calories_tot_low <- susoreview::create_issue(
-    df_attribs = attribs,
-    vars = c("calories_totales_faibles", "p_calcule_ok"),
-    where = calories_totales_faibles == 1 & p_calcule_ok == 1,
-    type = 1,
-    desc = "Calories totales trop faibles",
-    comment = paste0(
-        "ERREUR: La consommation alimentaire déclarée est trop faible. ",
-        "D'abord, confirmer que tous les produits consommés ont été renseignés. ",
-        "Ensuite, vérifier que les quantités et unités de consommation sont correctes"   
-    )
-)
+# # calories totales trop faible
+# issue_calories_tot_low <- susoreview::create_issue(
+#     df_attribs = attribs,
+#     vars = c("calories_totales_faibles", "p_calcule_ok"),
+#     where = calories_totales_faibles == 1 & p_calcule_ok == 1,
+#     type = 1,
+#     desc = "Calories totales trop faibles",
+#     comment = paste0(
+#         "ERREUR: La consommation alimentaire déclarée est trop faible. ",
+#         "D'abord, confirmer que tous les produits consommés ont été renseignés. ",
+#         "Ensuite, vérifier que les quantités et unités de consommation sont correctes"   
+#     )
+# )
 
-# calories trop élevées pour un item
-issue_calories_item_high <- susoreview::create_issue(
-    df_attribs = attribs,
-    vars = c("calories_item_elevees", "p_calcule_ok"),
-    where = calories_item_elevees == 1 & p_calcule_ok == 1,
-    type = 1,
-    desc = "Calories trop élevées pour un item",
-    comment = paste0(
-        "ERREUR. Trop de calories tirées d'un seul produit. D'abord, chercher le ",
-        "produit avec la plus grande quantité ou la plus grande unité de ",
-        "consommation. ",
-        "Ensuite, confirmer la consommation de celui-ci."
-    )
-)
+# # calories trop élevées pour un item
+# issue_calories_item_high <- susoreview::create_issue(
+#     df_attribs = attribs,
+#     vars = c("calories_item_elevees", "p_calcule_ok"),
+#     where = calories_item_elevees == 1 & p_calcule_ok == 1,
+#     type = 1,
+#     desc = "Calories trop élevées pour un item",
+#     comment = paste0(
+#         "ERREUR. Trop de calories tirées d'un seul produit. D'abord, chercher le ",
+#         "produit avec la plus grande quantité ou la plus grande unité de ",
+#         "consommation. ",
+#         "Ensuite, confirmer la consommation de celui-ci."
+#     )
+# )
 
-# items pour lesqules les calories sont trop élevées
-produit_codes <- c(
-    "aliment__id %in% c(1:26, 166:169)",
-    "aliment__id %in% c(27:39, 170, 171)",
-    "aliment__id %in% c(40:51, 172, 173)",
-    "aliment__id %in% c(52:60, 174)",
-    "aliment__id %in% c(61:70, 175)",
-    "aliment__id %in% c(71:87, 176)",
-    "aliment__id %in% c(88:108, 177)",
-    "aliment__id %in% c(109:133, 178)",
-    "aliment__id %in% c(134:138)",
-    "aliment__id %in% c(139:154, 179)",
-    "aliment__id %in% c(155:165, 180)"
-)
+# # items pour lesqules les calories sont trop élevées
+# produit_codes <- c(
+#     "aliment__id %in% c(1:26, 166:169)",
+#     "aliment__id %in% c(27:39, 170, 171)",
+#     "aliment__id %in% c(40:51, 172, 173)",
+#     "aliment__id %in% c(52:60, 174)",
+#     "aliment__id %in% c(61:70, 175)",
+#     "aliment__id %in% c(71:87, 176)",
+#     "aliment__id %in% c(88:108, 177)",
+#     "aliment__id %in% c(109:133, 178)",
+#     "aliment__id %in% c(134:138)",
+#     "aliment__id %in% c(139:154, 179)",
+#     "aliment__id %in% c(155:165, 180)"
+# )
 
-produit_noms <- c(
-    "_1", # cereales
-    "_2", # viandes
-    "_3", # poissons
-    "_4", # laitier
-    "_10", # huiles
-    "_5", # fruits
-    "_6", # legumes
-    "_7", # legtub
-    "_8", # sucreries
-    "_9", # epices
-    "_11", # boissons
-)
+# produit_noms <- c(
+#     "_1", # cereales
+#     "_2", # viandes
+#     "_3", # poissons
+#     "_4", # laitier
+#     "_10", # huiles
+#     "_5", # fruits
+#     "_6", # legumes
+#     "_7", # legtub
+#     "_8", # sucreries
+#     "_9", # epices
+#     "_11", # boissons
+# )
 
-issues_where_calories_item_high <- purrr::map2_dfr(
-    .x = produit_codes,
-    .y = produit_noms,
-    .f = ~ susoreview::make_issue_in_roster(
-        df = dplyr::filter(calories_par_item,         
-            !!rlang::parse_quo(
-                glue::glue("{.x}"),
-                rlang::global_env()
-            )        
-        ),
-        where = calories_par_produit > 1500,
-        roster_vars = "aliment__id",
-        type = 2,
-        desc = "Calories trop élevées pour un item",
-        comment = "Calories trop élevées pour cet item",
-        issue_vars = glue::glue("v8103a_{.y}")
-    )
-)
+# issues_where_calories_item_high <- purrr::map2_dfr(
+#     .x = produit_codes,
+#     .y = produit_noms,
+#     .f = ~ susoreview::make_issue_in_roster(
+#         df = dplyr::filter(calories_par_item,         
+#             !!rlang::parse_quo(
+#                 glue::glue("{.x}"),
+#                 rlang::global_env()
+#             )        
+#         ),
+#         where = calories_par_produit > 1500,
+#         roster_vars = "aliment__id",
+#         type = 2,
+#         desc = "Calories trop élevées pour un item",
+#         comment = "Calories trop élevées pour cet item",
+#         issue_vars = glue::glue("v8103a_{.y}")
+#     )
+# )
 
 
 # =============================================================================

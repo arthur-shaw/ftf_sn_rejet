@@ -78,8 +78,8 @@ if (nrow(cases_to_review) == 0) {
 } else {
 
 # compute calories
-print("---- 04b Calculer les calories -----")
-source(paste0(script_dir, "04b_calculate_calories.R"))
+# print("---- 04b Calculer les calories -----")
+# source(paste0(script_dir, "04b_calculate_calories.R"))
 
 # compile attributes
 print("---- 05 Compilation d'attributs -----")

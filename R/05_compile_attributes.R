@@ -747,41 +747,41 @@ attrib_parcelle_patate_douce <- susoreview::any_obs(
 # Calories totales
 # -----------------------------------------------------------------------------
 
-# pourcentage de produits consommées qui ont été valorisés en calories
-attrib_p_aliments_valorises <- susoreview::create_attribute(
-    df = calories_totales,
-    condition = p_calcule > 0.7,
-    attrib_name = "p_calcule_ok",
-    attrib_vars = "^v8101_|^v8103a_|^v8103a_|^v8103a_"
-)
+# # pourcentage de produits consommées qui ont été valorisés en calories
+# attrib_p_aliments_valorises <- susoreview::create_attribute(
+#     df = calories_totales,
+#     condition = p_calcule > 0.7,
+#     attrib_name = "p_calcule_ok",
+#     attrib_vars = "^v8101_|^v8103a_|^v8103a_|^v8103a_"
+# )
 
-# trop de calories
-attrib_calories_elevees <- susoreview::create_attribute(
-    df = calories_totales,
-    condition = calories_totales > 4000,
-    attrib_name = "calories_totales_elevees",
-    attrib_vars = "^v8101_|^v8103a_|^v8103a_|^v8103a_"
-)
+# # trop de calories
+# attrib_calories_elevees <- susoreview::create_attribute(
+#     df = calories_totales,
+#     condition = calories_totales > 4000,
+#     attrib_name = "calories_totales_elevees",
+#     attrib_vars = "^v8101_|^v8103a_|^v8103a_|^v8103a_"
+# )
 
-# trop peu de calories
-attrib_calories_faibles <- susoreview::create_attribute(
-    df = calories_totales,
-    condition = calories_totales <= 800 &  p_calcule > 0.7,
-    attrib_name = "calories_totales_faibles",
-    attrib_vars = "^v8101_|^v8103a_|^v8103a_|^v8103a_"
-)
+# # trop peu de calories
+# attrib_calories_faibles <- susoreview::create_attribute(
+#     df = calories_totales,
+#     condition = calories_totales <= 800 &  p_calcule > 0.7,
+#     attrib_name = "calories_totales_faibles",
+#     attrib_vars = "^v8101_|^v8103a_|^v8103a_|^v8103a_"
+# )
 
 # -----------------------------------------------------------------------------
 # Calories par item
 # -----------------------------------------------------------------------------
 
-# trop de calories déclarée pour un seul item
-attrib_calories_elevees_item <- susoreview::any_obs(
-    df = calories_par_item,
-    where = calories_par_produit > 1500,
-    attrib_name = "calories_item_elevees",
-    attrib_vars = "^v8103a_|^v8103a_|^v8103a_"
-)
+# # trop de calories déclarée pour un seul item
+# attrib_calories_elevees_item <- susoreview::any_obs(
+#     df = calories_par_item,
+#     where = calories_par_produit > 1500,
+#     attrib_name = "calories_item_elevees",
+#     attrib_vars = "^v8103a_|^v8103a_|^v8103a_"
+# )
 
 # =============================================================================
 # Rassembler les attributs
