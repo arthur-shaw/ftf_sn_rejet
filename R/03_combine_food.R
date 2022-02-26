@@ -204,6 +204,7 @@ food_labels_all <- purrr::map(
 
 # combine all labels
 # so that a single set of value labels are applied to the combined data frame
+food_labels_all[[4]][["v8104"]] <- c(`AUCUNE` = 0) # insert missing label for sec8_1b_huiles, where a label is missing for v8104
 food_labels <- combine_val_labels(label_list = food_labels_all)
 
 # combine all data frames
