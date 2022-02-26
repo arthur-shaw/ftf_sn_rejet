@@ -264,9 +264,9 @@ w_names <- c(
 attrib_woman_24h <- purrr::map2(
         .x = w_vals,
         .y = w_names,
-        .f = ~ susoreview::create_attribute(
-            condition = !!rlang::parse_quo(
+        .f = ~ susoreview::any_obs(
             df = membres,
+            where = !!rlang::parse_quo(
                 paste0("v409a__", .x, " == 1"),
                 rlang::global_env()
             ),
@@ -339,8 +339,9 @@ c_names <- c(
 attrib_child_24h <- purrr::map2(
         .x = c_vals,
         .y = c_names,
-        .f = ~ susoreview::create_attribute(
-            condition = !!rlang::parse_quo(
+        .f = ~ susoreview::any_obs(
+            df = membres,
+            where = !!rlang::parse_quo(
                 paste0("v539a__", .x, " == 1"),
                 rlang::global_env()
             ),
@@ -359,24 +360,25 @@ attrib_child_24h <- purrr::map2(
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # riz
-attrib_conso7d_propre_riz <- susoreview::create_attribute(
-    condition = aliment__id %in% c(1, 2) & v8106 > 0,
+attrib_conso7d_propre_riz <- susoreview::any_obs(
+    df = consommation_alimentaire_7d,
+    where = aliment__id %in% c(1, 2) & v8106 > 0,
     attrib_name = "conso7d_propre_riz",
     attrib_vars = "v8101_1|v8106"
 )
 
 # patate douce
-attrib_conso7d_propre_patate_douce <- susoreview::create_attribute(
-    condition = aliment__id == 128 & v8106 > 0,
+attrib_conso7d_propre_patate_douce <- susoreview::any_obs(
     df = consommation_alimentaire_7d,
+    where = aliment__id == 128 & v8106 > 0,
     attrib_name = "conso7d_propre_patate_douce",
     attrib_vars = "v8101_7|v8106"
 )
 
 # mouton
-attrib_conso7d_propre_mouton <- susoreview::create_attribute(
-    condition = aliment__id == 29 & v8106 > 0,
+attrib_conso7d_propre_mouton <- susoreview::any_obs(
     df = consommation_alimentaire_7d,
+    where = aliment__id == 29 & v8106 > 0,
     attrib_name = "conso7d_propre_mouton",
     attrib_vars = "v8101_2|v8106"
 )
