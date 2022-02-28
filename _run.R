@@ -78,7 +78,7 @@ main_file_dta <- paste0(main_file_name, ".dta")
 # - Completed: 100
 # - ApprovedBySupervisor: 120
 # - ApprovedByHeadquarters: 130
-statuses_to_reject <- c(100, 120)
+statuses_to_reject <- c(120)
 
 # Fournir une liste délimitée par virgule des types de problèmes à rejeter
 # {susoreview} utilise les codes suivants:
