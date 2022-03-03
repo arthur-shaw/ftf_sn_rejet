@@ -715,20 +715,30 @@ attrib_cons7j_palme_rouge <- susoreview::any_obs(
 # Parcelles
 # -----------------------------------------------------------------------------
 
-# !!! TODO: confirm data structure for multi-select combo box
+parcelles_vcc <- parcelles |>
+    dplyr::mutate(
+        any_rice = dplyr::if_any(
+            .cols = dplyr::starts_with("v79_n5"),
+            .fns = ~ .x == 3, 15
+        ),
+        any_sweet_potatoes = dplyr::if_any(
+            .cols = dplyr::starts_with("v79_n5"),
+            .fns = ~ .x == 15
+        )
+    )
 
 # parcelle de riz
 attrib_parcelle_riz <- susoreview::any_obs(
-    df = parcelles,
-    where = v79_n5__3 == 1,
+    df = parcelles_vcc,
+    where = any_rice == 1,
     attrib_name = "parcelle_riz",
     attrib_vars = "v79_n5"
 )
 
 # parcelle de patate douce
 attrib_parcelle_patate_douce <- susoreview::any_obs(
-    df = parcelles,
-    where = v79_n5__15 == 1,
+    df = parcelles_vcc,
+    where = any_sweet_potatoes == 1,
     attrib_name = "parcelle_patate_douce",
     attrib_vars = "v79_n5"
 )
