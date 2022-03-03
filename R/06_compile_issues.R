@@ -469,7 +469,7 @@ issue_conso_femme_24h_v_7j <- purrr::pmap_dfr(
         type = 1,
         desc = glue::glue("consommation de {..1} par une femme dans les dernier 24h sans consommation par le ménage dans les 7 derniers jours"),
         comment = paste0(
-            glue::glue("ERREUR: consommation de {..1} par un enfant dans les dernières 24h sans consommation par le ménage dans les 7 derniers jours."),
+            glue::glue("ERREUR: consommation de {..1} par une femme dans les dernières 24h sans consommation par le ménage dans les 7 derniers jours."),
             glue::glue("Dans la section 4, l'une des femmes a consommée {..1} dans les dernières 24 heures. "),
             glue::glue("Or dans la section 8.1, le ménage déclare n'avoir pas consommé {..1} dans les 7 derniers jours. "),
             "Les dernières 24 rentrent dans les 7 derniers jours. ",
