@@ -519,7 +519,7 @@ issues_plus_unanswered <- susoreview::add_issue_if_unanswered(
     df_cases_to_review = cases_to_review,
     df_interview_stats = interview_stats,
     df_issues = issues,
-    n_unanswered_ok = 0,
+    n_unanswered_ok = 1, # to prevent supervisor-scope question from flagging
     issue_desc = "Questions laissés sans réponse",
     issue_comment = glue::glue("ERREUR: L'entretien a été marqué comme achevé, mais {NotAnswered} questions ont été laissées sans réponse. Veuillez renseigner ces questions.")
 )
