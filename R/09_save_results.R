@@ -38,7 +38,16 @@ write_to_excel_and_stata <- function(
     writexl::write_xlsx(x = data, path = paste0(dir, name, ".xlsx"), col_names = TRUE)
 
     # Stata
-    haven::write_dta(data = data, path = paste0(dir, name, ".dta"))
+    # - first, truncate character length for Stata strings
+    # - then, save truncated data
+    data |>
+    dplyr::mutate(
+        dplyr::across(
+            .cols = where(is.character),
+            .fns = ~ stringr::str_trunc(.x, width = 500)
+        )
+    ) |>
+    haven::write_dta(path = paste0(dir, name, ".dta"))
 
 }
 
