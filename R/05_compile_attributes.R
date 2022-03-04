@@ -349,6 +349,46 @@ attrib_child_24h <- purrr::map2(
     ) %>%
     dplyr::bind_rows()
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# MESURE ANTHRO FEMME SANS DÉCIMALE
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+anthro_sans_decimale <- membres |>
+    dplyr::select(interview__id, interview__key, PERSONS__id, dplyr::matches("v40[67]_[123]|v51[68]_[123]")) |> 
+    dplyr::mutate(
+        # identifier les mesures avec (TRUE) et sans (FALSE) décimale
+        # convertir les chiffres en caractère
+        # déterminer si le chiffre contient une décimale
+        dplyr::across(
+            .cols = dplyr::matches("v40[67]_[123]|v51[68]_[123]"),
+            .fns = ~ stringr::str_detect(as.character(.x), "\\."),
+        ),
+        # pour les femmes
+        w_sans_decimale = dplyr::if_any(
+            .cols = dplyr::matches("v40[67]_[123]"),
+            .fns = ~ .x == FALSE
+        ),
+        # pour les enfants
+        c_sans_decimale = dplyr::if_any(
+            .cols = dplyr::matches("v51[68]_[123]"),
+            .fns = ~ .x == FALSE
+        )
+    )    
+
+attrib_anthro_femme_sans_decimale <- susoreview::any_obs(
+    df = anthro_sans_decimale,
+    where = w_sans_decimale == TRUE,
+    attrib = "w_sans_decimale",
+    attrib_vars = "v40[67]_[123]"
+)
+
+attrib_anthro_enfant_sans_decimale <- susoreview::any_obs(
+    df = anthro_sans_decimale,
+    where = c_sans_decimale == TRUE,
+    attrib = "c_sans_decimale",
+    attrib_vars = "v51[68]_[123]"
+)
+
 # -----------------------------------------------------------------------------
 # CONSOMMATION ALIMENTAIRE 7 DERNIERS JOURS
 # -----------------------------------------------------------------------------

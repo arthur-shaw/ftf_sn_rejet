@@ -24,6 +24,58 @@ library(rlang)
 # =============================================================================
 
 # -----------------------------------------------------------------------------
+# Mesures anthro sans décimale
+# -----------------------------------------------------------------------------
+
+issue_anthro_femme_sans_decimale <- susoreview::create_issue(
+    df_attribs = attribs,
+    vars = "w_sans_decimale",
+    where = w_sans_decimale == TRUE,
+    type = 1,
+    desc = "Mesure anthro femme sans décimale",
+    comment = paste0(
+        "ERREUR: Mesure anthro pour une femme sans décimale. ",
+        "Les mesures anthro doivent être renseignées avec la précision d'une place après la virgule (eg, 8,0 au lieu de 8) ",
+        "Pour au moins une des femmes mesurées, l'une des mesures n'a pas de décimale. ",
+        "Veuillez corriger la mesure. Si la décimale est absente, veuillez l'ajouter ou l'insérer."
+    )
+)
+
+issue_anthro_femme_sans_decimale_comm <- susoreview::make_issue_in_roster(
+    df = anthro_sans_decimale,
+    where = w_sans_decimale == TRUE,
+    roster_vars = "PERSONS__id",
+    type = 2,
+    desc = "Mesure anthro femme sans décimale",
+    comment = "Au moins un des mesures pour cette femme n'a pas la précision nécessaire / une place après la décimale."
+    issue_vars = "v406_1"
+)
+
+issue_anthro_enfant_sans_decimale <- susoreview::create_issue(
+    df_attribs = attribs,
+    vars = "c_sans_decimale",
+    where = c_sans_decimale == TRUE,
+    type = 1,
+    desc = "Mesure anthro enfant sans décimale",
+    comment = paste0(
+        "ERREUR: Mesure anthro pour un enfant sans décimale. ",
+        "Les mesures anthro doivent être renseignées avec la précision d'une place après la virgule (eg, 8,0 au lieu de 8) ",
+        "Pour au moins un des enfants mesurés, l'une des mesures n'a pas de décimale. ",
+        "Veuillez corriger la mesure. Si la décimale est absente, veuillez l'ajouter ou l'insérer."
+    )
+)
+
+issue_anthro_enfant_sans_decimale_comm <- susoreview::make_issue_in_roster(
+    df = anthro_sans_decimale,
+    where = c_sans_decimale == TRUE,
+    roster_vars = "PERSONS__id",
+    type = 2,
+    desc = "Mesure anthro enfant sans décimale",
+    comment = "Au moins un des mesures pour cet enfant n'a pas la précision nécessaire / une place après la décimale."
+    issue_vars = "v406_1"
+)
+
+# -----------------------------------------------------------------------------
 # Consommation alimentaire
 # -----------------------------------------------------------------------------
 
