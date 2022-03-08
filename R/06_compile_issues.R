@@ -47,7 +47,7 @@ issue_anthro_femme_sans_decimale_comm <- susoreview::make_issue_in_roster(
     roster_vars = "PERSONS__id",
     type = 2,
     desc = "Mesure anthro femme sans décimale",
-    comment = "Au moins un des mesures pour cette femme n'a pas la précision nécessaire / une place après la décimale."
+    comment = "Au moins un des mesures pour cette femme n'a pas la précision nécessaire / une place après la décimale.",
     issue_vars = "v406_1"
 )
 
@@ -71,7 +71,7 @@ issue_anthro_enfant_sans_decimale_comm <- susoreview::make_issue_in_roster(
     roster_vars = "PERSONS__id",
     type = 2,
     desc = "Mesure anthro enfant sans décimale",
-    comment = "Au moins un des mesures pour cet enfant n'a pas la précision nécessaire / une place après la décimale."
+    comment = "Au moins un des mesures pour cet enfant n'a pas la précision nécessaire / une place après la décimale.",
     issue_vars = "v406_1"
 )
 
