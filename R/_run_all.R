@@ -102,7 +102,7 @@ source(paste0(script_dir, "07_make_decisions.R"))
 # - reject interviews
 if (should_reject == TRUE) {
 print("---- 08 Exécution des rejets -----")
-# source(paste0(script_dir, "08_execute_decisions.R"))
+source(paste0(script_dir, "08_execute_decisions.R"))
 }
 
 # save decisions to disk
