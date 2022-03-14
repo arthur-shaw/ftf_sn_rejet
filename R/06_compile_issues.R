@@ -491,9 +491,9 @@ issue_conso_enfant_24h_v_7j <- purrr::pmap_dfr(
     .l = list(enf_alim_desc, c_vars, enf_cons_vars),
     .f = ~ susoreview::create_issue(
         df_attribs = attribs,
-        vars = c(..2, ..3),
+        vars = c(..2, ..3, "repas_dehors_menage"),
         where = !!rlang::parse_quo(
-            glue::glue("{..2} == 1 & {..3} == 0"),
+            glue::glue("{..2} == 1 & {..3} == 0 & repas_dehors_menage == 0"),
             rlang::global_env()
         ),
         type = 1,
@@ -513,9 +513,9 @@ issue_conso_femme_24h_v_7j <- purrr::pmap_dfr(
     .l = list(alim_descs, w_vars, cons_vars),
     .f = ~ susoreview::create_issue(
         df_attribs = attribs,
-        vars = c(..2, ..3),
+        vars = c(..2, ..3, "repas_dehors_menage"),
         where = !!rlang::parse_quo(
-            glue::glue("{..2} == 1 & {..3} == 0"),
+            glue::glue("{..2} == 1 & {..3} == 0 & repas_dehors_menage == 0"),
             rlang::global_env()
         ),
         type = 1,
