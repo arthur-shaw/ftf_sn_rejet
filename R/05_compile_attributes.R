@@ -358,10 +358,10 @@ anthro_sans_decimale <- membres |>
     dplyr::mutate(
         # identifier les mesures avec (TRUE) et sans (FALSE) décimale
         # convertir les chiffres en caractère
-        # déterminer si le chiffre contient une décimale
+        # déterminer si le chiffre contient une décimale ou se termine en zéro
         dplyr::across(
             .cols = dplyr::matches("v40[67]_[123]|v51[68]_[123]"),
-            .fns = ~ stringr::str_detect(as.character(.x), "\\."),
+            .fns = ~ stringr::str_detect(as.character(.x), "\\.") | stringr::str_detect(as.character(.x), "0$"),
         ),
         # pour les femmes
         w_sans_decimale = dplyr::if_any(
