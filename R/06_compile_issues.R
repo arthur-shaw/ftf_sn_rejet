@@ -484,7 +484,7 @@ alim_descs <- c(
 )
 
 # remove boissons sucrées from list
-enf_cons_vars <- cons_vars[! cons_vars %in% c("cons7j_sucreries")]
+enf_cons_vars <- cons_vars[! cons_vars %in% c("cons7j_boissons_sucrees")]
 enf_alim_desc <- alim_descs[! alim_descs %in% c("des boissons sucrées (e.g., boissons gazeuses/sodas, jus sucrés, etc)")]
 
 issue_conso_enfant_24h_v_7j <- purrr::pmap_dfr(
