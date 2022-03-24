@@ -559,6 +559,25 @@ interview_stats <- suso_diagnostics %>%
     ) %>%
     dplyr::select(interview__id, interview__key, NotAnswered, WithComments, Invalid)
 
+# calculate the number of legit missing
+n_legit_miss_df <- consommation_alimentaire_7d |>
+    dplyr::filter(
+        aliment__id %in% c(
+            69, # noix de palme
+            71:87 # fruits
+        )
+    ) |>
+    dplyr::mutate(
+        dplyr::across(
+            .cols = c(v8103b, v8103c, N81000c, N81000d),
+            .fns = ~ haven::is_tagged_na(.x, tag = "a")
+        ),
+        n_legit_miss = v8103b + v8103c + N81000c + N81000d
+    ) |>
+    dplyr::group_by(interview__id, interview__key) |>
+    dplyr::summarise(n_legit_miss = sum(n_legit_miss, na.rm = TRUE)) |>
+    dplyr::ungroup()
+
 # prepare number of legit missing file
 # TODO: see if any legit unanswered
 # num_legit_miss <- num_legit_miss %>%
@@ -572,6 +591,7 @@ issues_plus_unanswered <- susoreview::add_issue_if_unanswered(
     df_interview_stats = interview_stats,
     df_issues = issues,
     n_unanswered_ok = 1, # to prevent supervisor-scope question from flagging
+    df_legit_miss = n_legit_miss_df,
     issue_desc = "Questions laissés sans réponse",
     issue_comment = glue::glue("ERREUR: L'entretien a été marqué comme achevé, mais {NotAnswered} questions ont été laissées sans réponse. Veuillez renseigner ces questions.")
 )

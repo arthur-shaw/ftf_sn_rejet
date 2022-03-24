@@ -1012,9 +1012,9 @@
       "RemoteUsername": "arthur-shaw",
       "RemoteRepo": "susoreview",
       "RemoteRef": "master",
-      "RemoteSha": "3882d8691676e165cf932a00f05d0e18a147841b",
+      "RemoteSha": "cf17516be39188c67a2e54b961e6427aa6b9a7b5",
       "Remotes": "github::arthur-shaw/susoapi",
-      "Hash": "b2764471ba42e9b7b93c79969b89163b",
+      "Hash": "871ff05db364bbbcdd2e1710f120231a",
       "Requirements": [
         "dplyr",
         "fuzzyjoin",
