@@ -21,6 +21,48 @@ objects_needed <- c(
 check_exists(objects_needed)
 
 # =============================================================================
+# Correct French accents in error messages
+# =============================================================================
+
+#' Correct French accents
+#' 
+#' Replace gibberish with correct Unicode accents
+#' 
+#' @param df Data frame.
+#' @param msg_var Bare variable name.
+#' 
+#' @importFrom dplyr mutate
+#' @importFrom stringr str_replace
+#' @importFrom rlang `{{`
+correct_accents <- function(
+    df,
+    msg_var
+) {
+
+    dplyr::mutate(.data = df,
+        {{msg_var}} := stringr::str_replace({{msg_var}}, "[0-9]+ questions ont", "XX questions ont"),
+        {{msg_var}} := stringr::str_replace_all({{msg_var}}, pattern = "Ã©", replacement = "é"),
+        {{msg_var}} := stringr::str_replace_all({{msg_var}}, pattern = "Ã¢", replacement = "â"),
+        {{msg_var}} := stringr::str_replace_all({{msg_var}}, pattern = "Ã¨", replacement = "è"),
+        {{msg_var}} := stringr::str_replace_all({{msg_var}}, pattern = "Ã", replacement = "à"),
+        {{msg_var}} := stringr::str_replace_all({{msg_var}}, pattern = '"', replacement = "")    
+    )
+
+}
+
+# to_reject
+to_reject_api <- correct_accents(df = to_reject_api, msg_var = reject_comment)
+to_reject_issues <- correct_accents(df = to_reject_issues, msg_var = issue_comment)
+
+# to_review
+to_review_api <- correct_accents(df = to_review_api, msg_var = reject_comment)
+to_review_issues <- correct_accents(df = to_review_issues, msg_var = issue_comment)
+
+# to_follow_up
+to_follow_up_api <- correct_accents(df = to_follow_up_api, msg_var = reject_comment)
+to_follow_up_issues <- correct_accents(df = to_follow_up_issues, msg_var = issue_comment)
+
+# =============================================================================
 # Write decisions to disk in Excel and Stata format
 # =============================================================================
 
