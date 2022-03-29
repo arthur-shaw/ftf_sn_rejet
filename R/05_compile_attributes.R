@@ -172,6 +172,7 @@ attrib_possede_velo <- susoreview::create_attribute(
 attrib_possede_vehic_motorise <- susoreview::create_attribute(
     df = menages,
     condition = (
+        v8701__8336 == 1 |  # pirogue
         v8701__8337 == 1 |  # moto
         v8701__8338 == 1 |  # voiture
         v8701__8339 == 1 |  # minibus
