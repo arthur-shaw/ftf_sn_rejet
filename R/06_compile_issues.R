@@ -235,21 +235,21 @@ issue_no_non_food_cons <- susoreview::create_issue(
 # -----------------------------------------------------------------------------
 
 # portable, mais pas crédits de communication
-issue_portable_sans_communication <- susoreview::create_issue(
-    df_attribs = attribs,
-    vars = c("possede_portable", "depenses_credit_comm"),
-    where = possede_portable == 1 & depenses_credit_comm == 0,
-    type = 1,
-    desc = "Possède portable, mais pas de crédit de communication",
-    comment = paste0(
-        "ERREUR: possède portable sans frais de communication. ",
-        "Le ménage possède un téléphone portable selon la section 8.7, ",
-        "mais ne déclare aucun dépense de crédit de communication dans la ",
-        "section 8.2. ",
-        "Ceci est peu problable. ",
-        "Veuillez vérifier quelle information est correcte."
-    )
-)
+# issue_portable_sans_communication <- susoreview::create_issue(
+#     df_attribs = attribs,
+#     vars = c("possede_portable", "depenses_credit_comm"),
+#     where = possede_portable == 1 & depenses_credit_comm == 0,
+#     type = 1,
+#     desc = "Possède portable, mais pas de crédit de communication",
+#     comment = paste0(
+#         "ERREUR: possède portable sans frais de communication. ",
+#         "Le ménage possède un téléphone portable selon la section 8.7, ",
+#         "mais ne déclare aucun dépense de crédit de communication dans la ",
+#         "section 8.2. ",
+#         "Ceci est peu problable. ",
+#         "Veuillez vérifier quelle information est correcte."
+#     )
+# )
 
 # crédits de communication, mais aucun portable
 issue_communication_sans_portable <- susoreview::create_issue(
